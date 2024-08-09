@@ -15,5 +15,5 @@ public interface DisplayMainMenu extends JpaRepository<User, String> {
             "FROM User U " +
             "LEFT JOIN AdminUser A ON U.Username = A.Username " +
             "WHERE U.Username = :Username", nativeQuery = true)
-    Optional<MainMenuResponse> getMainMenu(@Param("Username") String Username);
+    Optional<MainMenuResponse> displayMainMenu(@Param("Username") String Username);
 }
