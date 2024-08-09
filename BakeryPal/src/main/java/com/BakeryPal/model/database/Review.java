@@ -1,4 +1,4 @@
-package com.BakeryPal.model;
+package com.BakeryPal.model.database;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -8,14 +8,20 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "admin")
-public class Admin {
+@Table(name = "Review")
+public class Review {
     @Id
-    @Column(name = "Username")
-    private String username;
+    @Column(name = "ReviewID")
+    private int reviewID;
 
+    @Column(name = "Reviews")
+    private String reviews;
+
+    @Column(name = "DateAndTime")
+    private String dateAndTime;
 }
