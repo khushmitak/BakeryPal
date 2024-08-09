@@ -13,5 +13,5 @@ import java.util.Optional;
 public interface LoginUser extends JpaRepository<User, String> {
     @Query(value = "SELECT Username, Password FROM User WHERE Username=:Username AND Password=:Password",
             nativeQuery = true)
-    Optional<LoginResponse> getLoginDetails(@Param("Username") String Username, @Param("Password") String password)
+    Optional<LoginResponse> getLoginDetails(@Param("Username") String Username, @Param("Password") String password);
 }

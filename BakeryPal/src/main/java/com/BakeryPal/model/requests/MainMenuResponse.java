@@ -1,6 +1,7 @@
 package com.BakeryPal.model.requests;
 
-public class MainMenuResponse {
+public interface MainMenuResponse {
     public String getfirstName();
+
     public String getlastName();
 }
