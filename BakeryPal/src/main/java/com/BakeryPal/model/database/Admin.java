@@ -18,4 +18,6 @@ public class Admin {
     @Column(name = "Username")
     private String username;
 
+    @Column(name = "Position")
+    private String position;
 }
