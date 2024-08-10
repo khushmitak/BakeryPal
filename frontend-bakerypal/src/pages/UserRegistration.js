@@ -68,7 +68,7 @@ const Register = () => {
                 >
                     <Typography component="h1" variant="h2"
                                 sx={{
-                                    textShadow: '5px 5px 5px rgba(79, 74, 204, 0.42)', // Adjust the shadow to your preference
+                                    textShadow: '5px 5px 5px rgba(79, 74, 204, 0.42)',
                                 }}>
                         Register User
                     </Typography>
