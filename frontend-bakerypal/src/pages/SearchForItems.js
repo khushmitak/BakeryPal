@@ -9,7 +9,6 @@ import { Grid, MenuItem } from '@mui/material';
 import '../index.css';
 import { fetchData } from '../services/API';
 import { useNavigate } from 'react-router-dom';
-import CurrencyTextField from '@lupus-ai/mui-currency-textfield';
 import {clearCookies} from "../services/Utility";
 
 const Search = () => {
@@ -102,38 +101,12 @@ const Search = () => {
                                 })
                             }
                         </TextField>
-                        <CurrencyTextField
-                            label="Minimum Price"
-                            variant="outlined"
-                            value={minPrice}
-                            currencySymbol="$"
-                            outputFormat="string"
-                            decimalCharacter="."
-                            digitGroupSeparator=","
-                            onChange={(event, value) => setMinPrice(value)}
-                            fullWidth
-                            style={{ marginTop: 17 }}
-                        />
-                        <CurrencyTextField
-                            label="Maximum Price"
-                            variant="outlined"
-                            value={maxPrice}
-                            currencySymbol="$"
-                            outputFormat="string"
-                            decimalCharacter="."
-                            digitGroupSeparator=","
-                            onChange={(event, value) => setMaxPrice(value)}
-                            fullWidth
-                            style={{ marginTop: 17 }}
-                        />
+
                         <Grid container justify='space-between' sx={{ mt: 3, mb: 2 }}>
                             <Grid item xs={6}>
                                 <Button type="button" variant='contained' sx={{ width: '90%' }} onClick={onClickCancel} >
                                     Cancel
                                 </Button>
-                            </Grid>
-                            <Grid item xs={6}>
-
                             </Grid>
                         </Grid>
                     </Box>
