@@ -65,13 +65,13 @@ const MainMenu = () => {
                 <CssBaseline />
                 <Box
                     sx={{
-                        marginTop: 8,
+                        marginTop: 3,
                         display: 'flex',
                         flexDirection: 'column',
                         alignItems: 'center',
                     }}
                 >
-                    <Typography component="h1" variant="h2">
+                    <Typography component="h1" variant="h2" sx = {{textShadow: '5px 5px 5px rgba(79, 74, 204, 0.42)',}}>
                         Main Menu
                     </Typography>
                     <Typography component="h1" variant="h5" sx={{ marginTop: 4, }}>
@@ -83,11 +83,11 @@ const MainMenu = () => {
                     <Grid container sx={{ mt: 3 }}>
                         <Grid item xs={isAdmin? 6: 12}>
                             <Typography component="h1" variant="h6">
-                                Interested In?
+                                Select one:
                             </Typography>
                             <div style={{ textAlign: "center" }}>
                                 <List>
-                                    <li><Link href="/searchItems" sx={{ fontSize: 22 }}>Search for Bakery Items</Link></li>
+                                    <li><Link href="/SearchItems" sx={{ fontSize: 22 }}>Search for Bakery Items</Link></li>
                                     <li><Link href="/addReviews" sx={{ fontSize: 22 }}>Add Review</Link></li>
                                     <li><Link href="/viewReviews" sx={{ fontSize: 22 }}>View Previous Reviews</Link></li>
                                 </List>
