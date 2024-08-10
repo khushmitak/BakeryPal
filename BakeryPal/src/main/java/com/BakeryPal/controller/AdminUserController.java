@@ -2,7 +2,7 @@ package com.BakeryPal.controller;
 
 import com.BakeryPal.dao.GetAdminUser;
 import com.BakeryPal.model.requests.AdminUserResponse;
-import com.BakeryPal.model.database.Admin;
+import com.BakeryPal.model.database.AdminUser;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,7 +15,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/admin")
+@RequestMapping("/adminuser")
 public class AdminUserController {
     @Autowired
     private GetAdminUser getAdminUser;
@@ -25,7 +25,7 @@ public class AdminUserController {
 
     @GetMapping("/{username}")
     public AdminUserResponse getAdminUser(@PathVariable String username) {
-        final Optional<Admin> adminUser = getAdminUser.getAdminUser(username);
+        final Optional<AdminUser> adminUser = getAdminUser.getAdminUser(username);
         if (adminUser.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Admin user does not exists.");
         }
