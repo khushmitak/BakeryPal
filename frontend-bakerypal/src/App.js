@@ -3,7 +3,6 @@ import {Routes, Route} from 'react-router-dom';
 import Login from './pages/UserLogin';
 import Register from './pages/UserRegistration';
 import MainMenu from './pages/MainMenu';
-import SearchForm from './pages/SearchForItems';
 import SearchForItems from "./pages/SearchForItems";
 
 
