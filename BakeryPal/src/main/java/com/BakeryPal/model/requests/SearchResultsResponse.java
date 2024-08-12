@@ -5,4 +5,5 @@ public interface SearchResultsResponse {
     String getItemName();
     String getDescription();
     String getPrice();
+    String getImageUrl();
 }

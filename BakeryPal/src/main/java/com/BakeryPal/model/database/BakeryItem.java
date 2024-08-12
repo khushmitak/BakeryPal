@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "Bakeryitem")
+@Table(name = "BakeryItem")
 public class BakeryItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,4 +27,7 @@ public class BakeryItem {
 
     @Column(name = "CategoryName")
     private String categoryName;
+
+    @Column(name = "ImageUrl")
+    private String imageUrl;
 }

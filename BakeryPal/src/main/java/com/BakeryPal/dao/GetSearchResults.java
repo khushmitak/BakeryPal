@@ -14,7 +14,8 @@ public interface GetSearchResults extends JpaRepository<BakeryItem,Integer> {
     @Query(value= "SELECT I.ItemID AS 'ItemID', " +
             "I.ItemName AS 'ItemName', " +
             "I.Price AS 'Price', " +
-            "I.Description AS 'Description' " +
+            "I.Description AS 'Description', " +
+            "I.ImageUrl " +
             "FROM BakeryItem AS I " +
             "WHERE " +
             "(I.ItemName LIKE :keyword) AND I.CategoryName LIKE :categoryName " +
