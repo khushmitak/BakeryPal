@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { postData } from "../services/API";
-import { Box, Container, CssBaseline, Link, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material";
-import {clearCookies} from "../services/Utility";
-import Button from "@mui/material/Button";
+import { Box, Container, CssBaseline, Link, Typography, Grid, Card, CardContent, CardMedia, Button } from "@mui/material";
+import { clearCookies } from "../services/Utility";
 
 const SearchResults = () => {
     const location = useLocation();
@@ -11,42 +10,28 @@ const SearchResults = () => {
     const [searchData, setSearchData] = useState([]);
 
     useEffect(() => {
-        let { keyword, category} = location.state;
+        const { keyword, category } = location.state;
 
         postData("/item/searchItem", {
             keyword: `%${keyword}%`,
             categoryName: `%${category}%`
         }).then((data) => {
-            setSearchData(data[1]);
+            setSearchData(data[1]); // Ensure data[1] contains the item array with imageUrl field
         });
     }, [location.state]);
 
     if (!searchData) {
-        return <div></div>;
-    }
-
-    const columnOrder = ["itemID", "itemName", "price", "description"];
-
-    function formatHeader(header) {
-        const headerMap = {
-            "itemID": "ID",
-            "itemName": "Item Name",
-            "price": "Price",
-            "description": "Description"
-        }
-        return headerMap[header];
-    }
-
-    function onClickLink(itemId) {
-        navigate(`/itemForSale?id=${itemId}`, {
-            state: location.state
-        });
+        return <div>Loading...</div>;
     }
 
     const handleLogout = () => {
         clearCookies();
         navigate('/');
     };
+
+    function handleItemClick(itemId) {
+        navigate(`/itemForSale?id=${itemId}`, { state: location.state });
+    }
 
     return (
         <div className="App App-header">
@@ -72,45 +57,42 @@ const SearchResults = () => {
                     <Typography component="h1" variant="h3" sx={{ mb: 3, fontSize: '3rem' }}>
                         Search Results
                     </Typography>
-                    <TableContainer component={Paper} sx={{ marginTop: 5, marginBottom: 5, borderRadius: '12px', backgroundColor: 'rgba(150, 96, 64, 0.61)', backdropFilter: 'blur(10px)' }}>
-                        {searchData && Object.keys(searchData).length !== 0 && <Table aria-label="simple table">
-                            <TableHead>
-                                <TableRow>
-                                    {
-                                        columnOrder.map((header) => {
-                                            return (<TableCell key={header} align="left" style={{ fontWeight: "bold", fontSize: '1.2rem',  padding: '12px'}}>{formatHeader(header)}</TableCell>);
-                                        })
-                                    }
-                                </TableRow>
-                            </TableHead>
-                            <TableBody>
-                                {
-                                    searchData.map((row) => {
-                                        return (
-                                            <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-                                                {
-                                                    columnOrder.map((key) => {
-                                                        let value = row[key];
-                                                        if (key === "itemName") {
-                                                            const itemId = row["itemID"];
-                                                            value = (<Link onClick={() => onClickLink(itemId)} component="button" sx={{ fontWeight: "bold", fontSize: '1.2rem', color: 'rgba(5, 81, 216, 0.84)', textDecoration: 'none', '&:hover': { textDecoration: 'underline' } }}>{value}</Link>);
-                                                        }
-                                                        return <TableCell align="left" sx={{ fontSize: '1.2rem', padding: '12px' }}>{value}</TableCell>
-                                                    })
-                                                }
-                                            </TableRow>
-                                        );
-                                    })
-                                }
-                            </TableBody>
-                        </Table>}
-                    </TableContainer>
-                    <Link href="/SearchItems" style={{ fontSize: 20, fontWeight: "bold" }}>&lt; Search</Link>
+                    <Grid container spacing={4}>
+                        {searchData.map((row) => (
+                            <Grid item xs={12} sm={6} md={4} key={row.itemID}>
+                                <Card sx={{ display: 'flex', flexDirection: 'row', borderRadius: '12px', backgroundColor: 'rgba(150, 96, 64, 0.61)' }}>
+                                    <CardMedia
+                                        component="img"
+                                        sx={{ marginTop: 1.5, marginLeft: 2, marginBottom: 1.5, width: 120, height: 120, borderRadius: '12px', objectFit: 'cover' }}
+                                        image={row.imageUrl} // Use the URL from the backend
+                                        alt={row.itemName}
+                                    />
+                                    <CardContent sx={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+                                        <Typography variant="h6" component="div" sx={{ fontWeight: 'bold', fontSize: 22 }}>
+                                            {row.itemName}
+                                        </Typography>
+                                        <Typography variant="body2" color="text.secondary" sx ={{fontSize: 20, fontWeight: 'bold'}}>
+                                            Price: ${row.price}
+                                        </Typography>
+                                        <Box sx={{ mt: 'auto' }}>
+                                            <Link
+                                                onClick={() => handleItemClick(row.itemID)}
+                                                component="button"
+                                                sx={{ fontWeight: 'bold', fontSize: '1.1rem', color: 'rgba(5, 81, 216, 0.84)', textDecoration: 'none', '&:hover': { textDecoration: 'underline' } }}
+                                            >
+                                                View Details
+                                            </Link>
+                                        </Box>
+                                    </CardContent>
+                                </Card>
+                            </Grid>
+                        ))}
+                    </Grid>
+                    <Link href="/SearchItems" style={{ fontSize: 20, fontWeight: 'bold' }}>&lt; Search</Link>
                 </Box>
             </Container>
         </div>
     );
-
-}
+};
 
 export default SearchResults;
