@@ -32,11 +32,17 @@ const Search = () => {
         navigate("/MainMenu");
     }
 
+    function onClickSearch() {
+        navigate("/SearchResults", {
+            state: {
+                keyword,
+                category
+            }
+        });
+    }
 
     const [keyword, setKeyword] = useState('');
     const [category, setCategory] = useState('');
-    const [minPrice, setMinPrice] = useState('');
-    const [maxPrice, setMaxPrice] = useState('');
 
     return (
         <div className="App App-header">
@@ -106,6 +112,11 @@ const Search = () => {
                             <Grid item xs={6}>
                                 <Button type="button" variant='contained' sx={{ width: '90%' }} onClick={onClickCancel} >
                                     Cancel
+                                </Button>
+                            </Grid>
+                            <Grid item xs={6}>
+                                <Button type="button" variant='contained' sx={{ width: '90%' }} onClick={onClickSearch} >
+                                    Search
                                 </Button>
                             </Grid>
                         </Grid>
