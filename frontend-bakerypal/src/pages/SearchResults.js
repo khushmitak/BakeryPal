@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { postData } from "../services/API";
 import { Box, Container, CssBaseline, Link, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material";
-import { formatDate } from "../services/Utility";
 
 const SearchResults = () => {
     const location = useLocation();
@@ -17,8 +16,6 @@ const SearchResults = () => {
             categoryName: `%${category}%`
         }).then((data) => {
             setSearchData(data[1]);
-        }).catch((error) => {
-            console.error("Error fetching search results:", error);
         });
     }, [location.state]);
 
@@ -26,15 +23,14 @@ const SearchResults = () => {
         return <div></div>;
     }
 
-    const columnOrder = ["ItemID", "ItemName", "CategoryName", "Price", "Description"];
+    const columnOrder = ["itemID", "itemName", "price", "description"];
 
     function formatHeader(header) {
         const headerMap = {
-            "ItemID": "ID",
-            "ItemName": "Item Name",
-            "CategoryName": "Category",
-            "Price": "Price",
-            "Description": "Description"
+            "itemID": "ID",
+            "itemName": "Item Name",
+            "price": "Price",
+            "description": "Description"
         }
         return headerMap[header];
     }
@@ -79,8 +75,8 @@ const SearchResults = () => {
                                                 {
                                                     columnOrder.map((key) => {
                                                         let value = row[key];
-                                                        if (key === "ItemName") {
-                                                            const itemId = row["ItemID"];
+                                                        if (key === "itemName") {
+                                                            const itemId = row["itemID"];
                                                             value = (<Link onClick={() => onClickLink(itemId)} component="button">{value}</Link>);
                                                         }
                                                         return <TableCell align="left">{value}</TableCell>
@@ -93,7 +89,7 @@ const SearchResults = () => {
                             </TableBody>
                         </Table>}
                     </TableContainer>
-                    <Link href="/SearchForItems" style={{ fontSize: 14 }}>&lt; Search</Link>
+                    <Link href="/SearchItems" style={{ fontSize: 14 }}>&lt; Search</Link>
                 </Box>
             </Container>
         </div>

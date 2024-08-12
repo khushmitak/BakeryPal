@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
 import java.util.Optional;
 
 
@@ -30,6 +31,9 @@ public class BakeryItemController {
 
     @Autowired
     private DeleteReview deleteReview;
+
+    @Autowired
+    private GetSearchResults searchResults;
 
     @PostMapping("/addItem")
     public ResponseEntity<String> addItem(@RequestBody BakeryItemResponse bakeryItemResponse) {
@@ -82,6 +86,11 @@ public class BakeryItemController {
             return new ResponseEntity<>("Unable to remove review.", HttpStatus.INTERNAL_SERVER_ERROR);
         }
         return new ResponseEntity<>("Your review has been removed.",HttpStatus.OK);
+    }
+
+    @PostMapping("/searchItem")
+    public List<SearchResultsResponse> searchItem(@RequestBody SearchResultsRequest searchItem) {
+        return searchResults.getSearchResults(searchItem.getKeyword(),searchItem.getCategoryName());
     }
 
 }
