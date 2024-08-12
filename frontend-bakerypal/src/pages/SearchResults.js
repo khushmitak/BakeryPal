@@ -53,16 +53,16 @@ const SearchResults = () => {
                         alignItems: 'center',
                     }}
                 >
-                    <Typography component="h1" variant="h3">
+                    <Typography component="h1" variant="h3" sx={{ mb: 3, fontSize: '3rem' }}>
                         Search Results
                     </Typography>
-                    <TableContainer component={Paper} sx={{ marginTop: 5, marginBottom: 5 }}>
+                    <TableContainer component={Paper} sx={{ marginTop: 5, marginBottom: 5, borderRadius: '12px', backgroundColor: 'rgba(150, 96, 64, 0.61)', backdropFilter: 'blur(10px)' }}>
                         {searchData && Object.keys(searchData).length !== 0 && <Table aria-label="simple table">
                             <TableHead>
                                 <TableRow>
                                     {
                                         columnOrder.map((header) => {
-                                            return (<TableCell key={header} align="left" style={{ fontWeight: "bold" }}>{formatHeader(header)}</TableCell>);
+                                            return (<TableCell key={header} align="left" style={{ fontWeight: "bold", fontSize: '1.2rem',  padding: '12px'}}>{formatHeader(header)}</TableCell>);
                                         })
                                     }
                                 </TableRow>
@@ -77,9 +77,9 @@ const SearchResults = () => {
                                                         let value = row[key];
                                                         if (key === "itemName") {
                                                             const itemId = row["itemID"];
-                                                            value = (<Link onClick={() => onClickLink(itemId)} component="button">{value}</Link>);
+                                                            value = (<Link onClick={() => onClickLink(itemId)} component="button" sx={{ fontWeight: "bold", fontSize: '1.2rem', color: 'rgba(5, 81, 216, 0.84)', textDecoration: 'none', '&:hover': { textDecoration: 'underline' } }}>{value}</Link>);
                                                         }
-                                                        return <TableCell align="left">{value}</TableCell>
+                                                        return <TableCell align="left" sx={{ fontSize: '1.2rem', padding: '12px' }}>{value}</TableCell>
                                                     })
                                                 }
                                             </TableRow>
