@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { postData } from "../services/API";
 import { Box, Container, CssBaseline, Link, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material";
+import {clearCookies} from "../services/Utility";
+import Button from "@mui/material/Button";
 
 const SearchResults = () => {
     const location = useLocation();
@@ -41,8 +43,22 @@ const SearchResults = () => {
         });
     }
 
+    const handleLogout = () => {
+        clearCookies();
+        navigate('/');
+    };
+
     return (
         <div className="App App-header">
+            <Box sx={{ position: 'absolute', top: 12, right: 12 }}>
+                <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={handleLogout}
+                >
+                    Logout ?
+                </Button>
+            </Box>
             <Container component="main" maxWidth="lg">
                 <CssBaseline />
                 <Box
@@ -89,7 +105,7 @@ const SearchResults = () => {
                             </TableBody>
                         </Table>}
                     </TableContainer>
-                    <Link href="/SearchItems" style={{ fontSize: 14 }}>&lt; Search</Link>
+                    <Link href="/SearchItems" style={{ fontSize: 20, fontWeight: "bold" }}>&lt; Search</Link>
                 </Box>
             </Container>
         </div>
