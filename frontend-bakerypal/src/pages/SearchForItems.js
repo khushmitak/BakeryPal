@@ -18,7 +18,7 @@ const Search = () => {
 
     useEffect(() => {
         fetchData("/categories").then((data) => {
-            data.push({"categoryName": ""});
+            data.push({"CategoryName": ""});
             setCategories(data);
         });
     }, []);
