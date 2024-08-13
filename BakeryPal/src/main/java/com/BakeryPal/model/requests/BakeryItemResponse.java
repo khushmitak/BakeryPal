@@ -16,4 +16,5 @@ public class BakeryItemResponse {
     private String description;
     private float price;
     private String categoryName;
+    private String imageUrl;
 }

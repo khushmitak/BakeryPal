@@ -7,6 +7,7 @@ import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.modelmapper.ModelMapper;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -34,6 +35,9 @@ public class BakeryItemController {
 
     @Autowired
     private GetSearchResults searchResults;
+
+    @Autowired
+    private ModelMapper mapper;
 
     @PostMapping("/addItem")
     public ResponseEntity<String> addItem(@RequestBody BakeryItemResponse bakeryItemResponse) {
@@ -77,7 +81,6 @@ public class BakeryItemController {
         return item.get();
     }
 
-
     @PostMapping("/{itemID}/deleteReview")
     public ResponseEntity<String> deleteReview(@PathVariable int itemID, @RequestBody DeleteReviewRequest deleteRatingRequest) {
         try {
@@ -91,6 +94,12 @@ public class BakeryItemController {
     @PostMapping("/searchItem")
     public List<SearchResultsResponse> searchItem(@RequestBody SearchResultsRequest searchItem) {
         return searchResults.getSearchResults(searchItem.getKeyword(),searchItem.getCategoryName());
+    }
+
+    @GetMapping("/{itemID}")
+    public BakeryItemResponse getItemDescription(@PathVariable int itemID) {
+        final BakeryItem item = verifyItemExists(itemID);
+        return mapper.map(item, BakeryItemResponse.class);
     }
 
 }

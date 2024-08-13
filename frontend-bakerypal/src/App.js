@@ -5,6 +5,7 @@ import Register from './pages/UserRegistration';
 import MainMenu from './pages/MainMenu';
 import SearchForItems from "./pages/SearchForItems";
 import SearchResults from "./pages/SearchResults";
+import ItemDetails from "./pages/ItemDetails";
 
 const App = () => {
   return (
@@ -15,6 +16,7 @@ const App = () => {
             <Route path="/MainMenu" element={<MainMenu />} />
             <Route path="/SearchItems" element={<SearchForItems />} />
             <Route path="/SearchResults" element={<SearchResults />} />
+            <Route path="/ItemDetails" element={<ItemDetails />} />
         </Routes>
       </>
   );

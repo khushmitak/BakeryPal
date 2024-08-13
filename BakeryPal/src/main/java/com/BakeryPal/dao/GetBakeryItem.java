@@ -12,6 +12,6 @@ import org.springframework.stereotype.Repository;
 public interface GetBakeryItem extends JpaRepository<BakeryItem, Integer> {
     @Query(
             nativeQuery = true,
-            value = "SELECT ItemID, ItemName, Description, Price, CategoryName FROM BakeryItem WHERE ItemID = :itemID")
+            value = "SELECT ItemID, ImageUrl, ItemName, Description, Price, CategoryName FROM BakeryItem WHERE ItemID = :itemID")
     Optional<BakeryItem> getBakeryItem(@Param("itemID") int itemID);
 }
