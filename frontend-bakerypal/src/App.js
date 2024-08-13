@@ -7,6 +7,7 @@ import SearchForItems from "./pages/SearchForItems";
 import SearchResults from "./pages/SearchResults";
 import ItemDetails from "./pages/ItemDetails";
 import AddReview from "./pages/AddReview";
+import DisplayReviews from "./pages/DisplayReviews";
 
 const App = () => {
   return (
@@ -19,6 +20,7 @@ const App = () => {
             <Route path="/SearchResults" element={<SearchResults />} />
             <Route path="/ItemDetails" element={<ItemDetails />} />
             <Route path="/AddReviews" element={<AddReview />} />
+            <Route path="/ViewReviews" element={<DisplayReviews />} />
         </Routes>
       </>
   );
