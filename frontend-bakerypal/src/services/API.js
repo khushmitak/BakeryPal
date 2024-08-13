@@ -1,33 +1,41 @@
-const API_BASE_URL = "http://localhost:8080/"
+const API_BASE_URL = "http://localhost:8080/";
 
 export const fetchData = async (endpoint) => {
-    const full_path = new URL(endpoint, API_BASE_URL).href;
-    const res = await fetch(full_path);
-    if (res.ok) {
-        const obj = await res.json();
-        return obj;
+    const fullPath = new URL(endpoint, API_BASE_URL).href;
+    const response = await fetch(fullPath);
+    if (response.ok) {
+        const data = await response.json();
+        return data;
     } else {
-        return res.status;
+        return { status: response.status, statusText: response.statusText };
     }
-}
+};
 
 export const postData = async (endpoint, body, requestType = "POST") => {
-    const full_path = new URL(endpoint, API_BASE_URL).href;
-    const res = await fetch(full_path, {
+    const fullPath = new URL(endpoint, API_BASE_URL).href;
+    const response = await fetch(fullPath, {
         method: requestType,
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Methods': 'PUT, POST, GET, DELETE, OPTIONS'
         },
-        body: JSON.stringify(body)
+        body: JSON.stringify(body),
     });
 
+    const contentType = response.headers.get('Content-Type');
+    let data;
+
     try {
-        const obj = await res.json();
-        return [res.status, obj];
-    } catch(e) {
-        return [res.status, {}];
+        if (contentType && contentType.includes('application/json')) {
+            data = await response.json();
+        } else {
+            data = await response.text();
+        }
+    } catch (e) {
+        data = `Error parsing response: ${e.message}`;
     }
-}
+
+    return { status: response.status, data };
+};
+
+

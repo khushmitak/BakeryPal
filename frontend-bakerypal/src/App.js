@@ -6,6 +6,7 @@ import MainMenu from './pages/MainMenu';
 import SearchForItems from "./pages/SearchForItems";
 import SearchResults from "./pages/SearchResults";
 import ItemDetails from "./pages/ItemDetails";
+import AddReview from "./pages/AddReview";
 
 const App = () => {
   return (
@@ -17,6 +18,7 @@ const App = () => {
             <Route path="/SearchItems" element={<SearchForItems />} />
             <Route path="/SearchResults" element={<SearchResults />} />
             <Route path="/ItemDetails" element={<ItemDetails />} />
+            <Route path="/AddReviews" element={<AddReview />} />
         </Routes>
       </>
   );

@@ -40,7 +40,7 @@ const ItemDetails = () => {
                        borderRadius: '10px',
                        padding: '20px',
                        marginTop: 5,
-                       backgroundColor: 'rgba(211, 203, 207, 0.1)', // Container background color
+                       backgroundColor: 'rgba(211, 203, 207, 0.1)',
                        backdropFilter: 'blur(10px)',
                        boxShadow: '15px 15px 15px rgba(201, 49, 128, 0.1)',
                    }}>
@@ -62,9 +62,9 @@ const ItemDetails = () => {
                         display: 'flex',
                         flexDirection: 'column',
                         alignItems: 'center',
-                        backgroundColor: 'rgba(211, 203, 207, 0.2)', // Match the container background
+                        backgroundColor: 'rgba(211, 203, 207, 0.2)',
                         borderRadius: '12px',
-                        boxShadow: 'none', // Remove default shadow if needed
+                        boxShadow: 'none',
                     }}>
                         <CardMedia
                             component="img"

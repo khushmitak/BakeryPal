@@ -88,7 +88,7 @@ const MainMenu = () => {
                             <div style={{ textAlign: "center" }}>
                                 <List>
                                     <li><Link href="/SearchItems" sx={{ fontSize: 22 }}>Search for Bakery Items</Link></li>
-                                    <li><Link href="/addReviews" sx={{ fontSize: 22 }}>Add Review</Link></li>
+                                    <li><Link href="/AddReviews" sx={{ fontSize: 22 }}>Add Review</Link></li>
                                     <li><Link href="/viewReviews" sx={{ fontSize: 22 }}>View Previous Reviews</Link></li>
                                 </List>
                             </div>
