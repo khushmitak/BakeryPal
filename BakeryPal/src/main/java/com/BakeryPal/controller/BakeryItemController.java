@@ -81,6 +81,29 @@ public class BakeryItemController {
         return item.get();
     }
 
+    @PostMapping("/addReview")
+    public ResponseEntity<String> addItemReview(@RequestBody ReviewItemRequest reviewItemRequest) {
+        try {
+            addItemReview.addItemReview(reviewItemRequest.getReviews());
+        } catch (Exception e) {
+            if (e.getCause() instanceof ConstraintViolationException) {
+                ConstraintViolationException constraintException = (ConstraintViolationException) e.getCause();
+                String constraintMsg = constraintException.getMessage();
+                String message;
+                if (constraintMsg.toUpperCase().contains("PRIMARY"))
+                    message = "Unable to add review as a review for this bakery already exists.";
+                else if (constraintMsg.toUpperCase().contains("FOREIGN"))
+                    message = "Unable to find the bakery to add a review.";
+                else
+                    message = "Unable to add your review for the bakery.";
+                return new ResponseEntity<>(message, HttpStatus.INTERNAL_SERVER_ERROR);
+            } else {
+                return new ResponseEntity<>("Unable to add your review for the bakery.", HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+        }
+        return new ResponseEntity<>("Your review has been added.", HttpStatus.OK);
+    }
+
     @PostMapping("/{itemID}/deleteReview")
     public ResponseEntity<String> deleteReview(@PathVariable int itemID, @RequestBody DeleteReviewRequest deleteRatingRequest) {
         try {

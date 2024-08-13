@@ -14,7 +14,7 @@ public interface AddItemReview extends JpaRepository<Review, Integer> {
     @Transactional
     @Query(
             nativeQuery = true,
-            value="INSERT INTO Review(ReviewID, Reviews, DateAndTime)" +
-                    "VALUES (:reviewID, :reviews, utc_timestamp())")
-    void rateItem(@Param("reviewID") int reviewID, @Param("reviews") String reviews);
+            value="INSERT INTO Review(Reviews, DateAndTime)" +
+                    "VALUES (:reviews, utc_timestamp())")
+    void addItemReview(@Param("reviews") String reviews);
 }
