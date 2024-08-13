@@ -37,6 +37,9 @@ public class BakeryItemController {
     private GetSearchResults searchResults;
 
     @Autowired
+    private GetBakeryReviews getBakeryReviews;
+
+    @Autowired
     private ModelMapper mapper;
 
     @PostMapping("/addItem")
@@ -112,6 +115,11 @@ public class BakeryItemController {
             return new ResponseEntity<>("Unable to remove review.", HttpStatus.INTERNAL_SERVER_ERROR);
         }
         return new ResponseEntity<>("Your review has been removed.",HttpStatus.OK);
+    }
+
+    @GetMapping("/viewReviews")
+    public List<GetReviews> getBakeryReviews() {
+        return getBakeryReviews.getBakeryReviews();
     }
 
     @PostMapping("/searchItem")
