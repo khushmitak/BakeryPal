@@ -45,7 +45,7 @@ public class BakeryItemController {
     @PostMapping("/addItem")
     public ResponseEntity<String> addItem(@RequestBody BakeryItemResponse bakeryItemResponse) {
         try {
-            addBakeryItem.addBakeryItem(bakeryItemResponse.getItemName(), bakeryItemResponse.getDescription(), bakeryItemResponse.getPrice(), bakeryItemResponse.getCategoryName());
+            addBakeryItem.addBakeryItem(bakeryItemResponse.getItemName(), bakeryItemResponse.getDescription(), bakeryItemResponse.getPrice(), bakeryItemResponse.getCategoryName(), bakeryItemResponse.getImageUrl());
         } catch(Exception e) {
             if (e.getCause() instanceof ConstraintViolationException) {
                 ConstraintViolationException constraintException =
