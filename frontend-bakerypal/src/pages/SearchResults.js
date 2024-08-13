@@ -8,6 +8,8 @@ const SearchResults = () => {
     const location = useLocation();
     const navigate = useNavigate();
     const [searchData, setSearchData] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
         const { keyword, category } = location.state;
@@ -15,13 +17,29 @@ const SearchResults = () => {
         postData("/item/searchItem", {
             keyword: `%${keyword}%`,
             categoryName: `%${category}%`
-        }).then((data) => {
-            setSearchData(data[1]); // Ensure data[1] contains the item array with imageUrl field
+        }).then(({ status, data }) => {
+            if (status === 200) {
+                setSearchData(data);
+            } else {
+                setError("Failed to load search results.");
+            }
+            setLoading(false);
+        }).catch(() => {
+            setError("An error occurred while fetching the data.");
+            setLoading(false);
         });
     }, [location.state]);
 
-    if (!searchData) {
+    if (loading) {
         return <div>Loading...</div>;
+    }
+
+    if (error) {
+        return <div>{error}</div>;
+    }
+
+    if (!searchData || searchData.length === 0) {
+        return <div>No items found.</div>;
     }
 
     const handleLogout = () => {
