@@ -7,8 +7,8 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { useNavigate } from 'react-router-dom';
 import { postData } from '../services/API';
-import {clearCookies} from "../services/Utility";
-import {Grid} from "@mui/material";
+import { clearCookies } from "../services/Utility";
+import { Grid } from "@mui/material";
 
 const AddReview = () => {
     const navigate = useNavigate();
@@ -80,7 +80,7 @@ const AddReview = () => {
                                 }}>
                         Add Review
                     </Typography>
-                    <Box component="form" noValidate sx={{ mt: 1 , width: '100%', maxWidth: '600px'}}>
+                    <Box component="form" noValidate sx={{ mt: 1, width: '100%', maxWidth: '600px' }} onSubmit={handleSubmit}>
                         <TextField
                             margin="normal"
                             required
@@ -97,7 +97,7 @@ const AddReview = () => {
                         />
                         <Grid container justify='space-between' sx={{ mt: 3, mb: 2 }}>
                             <Grid item xs={6}>
-                                <Button type="button" variant='contained' sx={{ width: '90%' }} onSubmit={handleSubmit}>
+                                <Button type="submit" variant='contained' sx={{ width: '90%' }}>
                                     Submit
                                 </Button>
                             </Grid>

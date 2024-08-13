@@ -1,41 +1,47 @@
-const API_BASE_URL = "http://localhost:8080/";
+const API_BASE_URL = "http://localhost:8080/"
 
 export const fetchData = async (endpoint) => {
-    const fullPath = new URL(endpoint, API_BASE_URL).href;
-    const response = await fetch(fullPath);
-    if (response.ok) {
-        const data = await response.json();
-        return data;
+    const full_path = new URL(endpoint, API_BASE_URL).href;
+    const res = await fetch(full_path);
+    if (res.ok) {
+        const obj = await res.json();
+        return obj;
     } else {
-        return { status: response.status, statusText: response.statusText };
+        return res.status;
     }
-};
+}
 
 export const postData = async (endpoint, body, requestType = "POST") => {
     const fullPath = new URL(endpoint, API_BASE_URL).href;
-    const response = await fetch(fullPath, {
-        method: requestType,
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(body),
-    });
-
-    const contentType = response.headers.get('Content-Type');
-    let data;
 
     try {
-        if (contentType && contentType.includes('application/json')) {
-            data = await response.json();
-        } else {
-            data = await response.text();
+        const response = await fetch(fullPath, {
+            method: requestType,
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Methods': 'PUT, POST, GET, DELETE, OPTIONS'
+            },
+            body: JSON.stringify(body),
+        });
+
+        const contentType = response.headers.get('Content-Type');
+        let data;
+
+        try {
+            if (contentType && contentType.includes('application/json')) {
+                data = await response.json();
+            } else {
+                data = await response.text();
+            }
+        } catch (e) {
+            // If JSON parsing fails, default to an empty object
+            data = {};
         }
-    } catch (e) {
-        data = `Error parsing response: ${e.message}`;
+        return { status: response.status, data };
+    } catch (error) {
+        console.error('Error during fetch:', error);
+        return { status: 500, data: 'Internal Server Error' };
     }
-
-    return { status: response.status, data };
 };
-
-
