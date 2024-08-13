@@ -30,7 +30,7 @@ const SearchResults = () => {
     };
 
     function handleItemClick(itemId) {
-        navigate(`/itemForSale?id=${itemId}`, { state: location.state });
+        navigate(`/ItemDetails?id=${itemId}`, { state: location.state });
     }
 
     return (
