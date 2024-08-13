@@ -8,6 +8,7 @@ import SearchResults from "./pages/SearchResults";
 import ItemDetails from "./pages/ItemDetails";
 import AddReview from "./pages/AddReview";
 import DisplayReviews from "./pages/DisplayReviews";
+import AddItem from "./pages/AddBakeryItem";
 
 const App = () => {
   return (
@@ -21,6 +22,7 @@ const App = () => {
             <Route path="/ItemDetails" element={<ItemDetails />} />
             <Route path="/AddReviews" element={<AddReview />} />
             <Route path="/ViewReviews" element={<DisplayReviews />} />
+            <Route path="/manage/addItem" element={<AddItem />} />
         </Routes>
       </>
   );
