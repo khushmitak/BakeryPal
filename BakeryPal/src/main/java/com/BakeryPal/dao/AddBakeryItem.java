@@ -15,11 +15,11 @@ public interface AddBakeryItem extends JpaRepository<BakeryItem, Integer> {
     @Transactional
     @Query(
             nativeQuery = true,
-            value = "INSERT INTO Item (itemName, description, price, categoryName) " +
-                    "VALUES (:itemName, :description, :price, :categoryName)"
+            value = "INSERT INTO BakeryItem (itemName, description, price, categoryName, imageUrl) " +
+                    "VALUES (:itemName, :description, :price, :categoryName, :imageUrl)"
     )
     void addBakeryItem(@Param("itemName") String itemName,
             @Param("description") String description, @Param("price") Float price,
-            @Param("categoryName") String categoryName
+            @Param("categoryName") String categoryName, @Param("imageUrl") String imageUrl
     );
 }
