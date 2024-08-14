@@ -20,6 +20,12 @@ const AddReview = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+
+        if (!reviews.trim()) {
+            alert('Review cannot be empty.');
+            return;
+        }
+
         try {
             const { status, data } = await postData('/item/addReview', { reviews });
 
@@ -34,6 +40,7 @@ const AddReview = () => {
             alert('An error occurred while adding the review.');
         }
     };
+
 
     const handleLogout = () => {
         clearCookies();

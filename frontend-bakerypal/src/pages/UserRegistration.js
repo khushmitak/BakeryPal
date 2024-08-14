@@ -18,6 +18,12 @@ const Register = () => {
         navigate("/");
     }
 
+    const [firstName, setFirstName] = React.useState('');
+    const [lastName, setLastName] = React.useState('');
+    const [username, setUsername] = React.useState('');
+    const [password, setPassword] = React.useState('');
+    const [confirmPassword, setConfirmPassword] = React.useState('');
+
     async function onClickRegister() {
         if (password !== confirmPassword) {
             window.alert("Passwords do not match!");
@@ -30,20 +36,22 @@ const Register = () => {
             firstName,
             lastName
         };
-        const [response, ] = await postData(`/user/registration/${username}`, body);
-        if (response === 200) {
-            storeCookie("username", username);
-            navigate("/MainMenu");
-        } else {
-            window.alert("Username already exists, please try a different username!");
+
+        try {
+            const { status, data } = await postData(`/user/registration/${username}`, body);
+
+            if (status === 200) {
+                storeCookie("username", username);
+                navigate("/MainMenu");
+            } else {
+                const errorMessage = data.message || "Username already exists, please try a different username!";
+                window.alert(errorMessage);
+            }
+        } catch (error) {
+            console.error("Registration failed:", error);
+            window.alert("An error occurred during registration. Please try again later.");
         }
     }
-
-    const [firstName, setFirstName] = React.useState('');
-    const [lastName, setLastName] = React.useState('');
-    const [username, setUsername] = React.useState('');
-    const [password, setPassword] = React.useState('');
-    const [confirmPassword, setConfirmPassword] = React.useState('');
 
     return (
         <div className="App App-header">
