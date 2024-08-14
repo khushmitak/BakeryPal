@@ -67,7 +67,7 @@ const AddItem = () => {
         <div className="App App-header">
             <Box sx={{ position: 'absolute', top: 12, right: 12 }}>
                 <Button variant="contained" color="primary" onClick={handleLogout}>
-                    Logout ?
+                    Logout
                 </Button>
             </Box>
             <Container component="main" maxWidth="xs" sx={{
