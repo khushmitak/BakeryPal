@@ -79,10 +79,10 @@ public class BakeryItemController {
 
     @PutMapping("/{itemID}/editItemDetails")
     @CrossOrigin
-    public ResponseEntity<String> editItemDetails(@PathVariable int itemID, @RequestBody EditItemResponse editDescriptionResponse) {
+    public ResponseEntity<String> editItemDetails(@PathVariable int itemID, @RequestBody EditItemResponse editItemResponse) {
         try{
             if((verifyItemExists(itemID))!=null)
-                editItemDetails.editItemDetails(itemID, editDescriptionResponse.getDescription());
+                editItemDetails.editItemDetails(itemID, editItemResponse.getPrice(), editItemResponse.getImageUrl());
         }catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }

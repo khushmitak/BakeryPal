@@ -10,6 +10,7 @@ import AddReview from "./pages/AddReview";
 import DisplayReviews from "./pages/DisplayReviews";
 import AddItem from "./pages/AddBakeryItem";
 import RemoveItem from "./pages/DeleteBakeryItem";
+import EditItem from "./pages/EditItem";
 
 const App = () => {
   return (
@@ -25,6 +26,8 @@ const App = () => {
             <Route path="/ViewReviews" element={<DisplayReviews />} />
             <Route path="/manage/addItem" element={<AddItem />} />
             <Route path="/manage/removeItem" element={<RemoveItem />} />
+            <Route path="/manage/editItem" element={<EditItem />} />
+
         </Routes>
       </>
   );
