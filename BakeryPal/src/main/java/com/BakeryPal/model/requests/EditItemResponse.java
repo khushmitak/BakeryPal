@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class EditItemResponse {
-    private String itemName;
-    private String description;
     private float price;
+    private String imageUrl;
 }

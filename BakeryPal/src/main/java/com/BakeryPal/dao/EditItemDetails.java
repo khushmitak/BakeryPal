@@ -12,6 +12,7 @@ public interface EditItemDetails extends JpaRepository<BakeryItem, Integer> {
     @Transactional
     @Query(
             nativeQuery = true,
-            value = "UPDATE BakeryItem SET ItemName = :itemName, Description = :description, Price = :price WHERE ItemID = :itemID")
-    void editItemDetails(@Param("itemID") int itemID, @Param("description") String description);
+            value = "UPDATE BakeryItem SET Price = :price, ImageUrl = :imageUrl WHERE ItemID = :itemID")
+    void editItemDetails(@Param("itemID") int itemID, @Param("price") float price,
+                         @Param("imageUrl") String imageUrl);
 }
