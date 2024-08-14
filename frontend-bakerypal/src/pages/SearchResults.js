@@ -59,7 +59,7 @@ const SearchResults = () => {
                     color="primary"
                     onClick={handleLogout}
                 >
-                    Logout ?
+                    Logout
                 </Button>
             </Box>
             <Container component="main" maxWidth="lg">
