@@ -22,6 +22,9 @@ public class BakeryItemController {
     private AddBakeryItem addBakeryItem;
 
     @Autowired
+    private DeleteBakeryItem deleteBakeryItem;
+
+    @Autowired
     private EditItemDetails editItemDetails;
 
     @Autowired
@@ -31,13 +34,13 @@ public class BakeryItemController {
     private AddItemReview addItemReview;
 
     @Autowired
-    private DeleteReview deleteReview;
-
-    @Autowired
     private GetSearchResults searchResults;
 
     @Autowired
     private GetBakeryReviews getBakeryReviews;
+
+    @Autowired
+    private GetAllBakeryItems getAllBakeryItems;
 
     @Autowired
     private ModelMapper mapper;
@@ -62,6 +65,16 @@ public class BakeryItemController {
             }
         }
         return new ResponseEntity<>("Item has been added successfully.",HttpStatus.OK);
+    }
+
+    @PostMapping("/deleteItem/{itemID}")
+    public ResponseEntity<String> deleteBakeryItem(@PathVariable int itemID) {
+        try {
+            deleteBakeryItem.deleteBakeryItem(itemID);
+        } catch (Exception e) {
+            return new ResponseEntity<>("Unable to remove item.", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        return new ResponseEntity<>("Your item has been removed.", HttpStatus.OK);
     }
 
     @PutMapping("/{itemID}/editItemDetails")
@@ -107,16 +120,6 @@ public class BakeryItemController {
         return new ResponseEntity<>("Your review has been added.", HttpStatus.OK);
     }
 
-    @PostMapping("/{itemID}/deleteReview")
-    public ResponseEntity<String> deleteReview(@PathVariable int itemID, @RequestBody DeleteReviewRequest deleteRatingRequest) {
-        try {
-            deleteReview.deleteRating(itemID);
-        }catch(Exception e) {
-            return new ResponseEntity<>("Unable to remove review.", HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-        return new ResponseEntity<>("Your review has been removed.",HttpStatus.OK);
-    }
-
     @GetMapping("/viewReviews")
     public List<GetReviews> getBakeryReviews() {
         return getBakeryReviews.getBakeryReviews();
@@ -131,6 +134,11 @@ public class BakeryItemController {
     public BakeryItemResponse getItemDescription(@PathVariable int itemID) {
         final BakeryItem item = verifyItemExists(itemID);
         return mapper.map(item, BakeryItemResponse.class);
+    }
+
+    @GetMapping("/viewAllItems")
+    public List<GetBakeryItems> getAllBakeryItems() {
+        return getAllBakeryItems.getAllBakeryItems();
     }
 
 }
