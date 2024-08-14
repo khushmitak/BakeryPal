@@ -82,7 +82,7 @@ const SearchResults = () => {
                                     <CardMedia
                                         component="img"
                                         sx={{ marginTop: 1.5, marginLeft: 2, marginBottom: 1.5, width: 120, height: 120, borderRadius: '12px', objectFit: 'cover' }}
-                                        image={row.imageUrl} // Use the URL from the backend
+                                        image={row.imageUrl}
                                         alt={row.itemName}
                                     />
                                     <CardContent sx={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
